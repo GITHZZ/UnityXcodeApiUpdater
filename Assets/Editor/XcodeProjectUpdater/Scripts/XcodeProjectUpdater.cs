@@ -31,7 +31,8 @@ public class XcodeProjectUpdater : MonoBehaviour {
 		//Xcodeの設定データを読み込む
 		XcodeProjectSetting setting = Resources.Load<XcodeProjectSetting>(SETTING_DATA_PATH);
 		if(setting == null){
-			Debug.Log ("Resources/" + SETTING_DATA_PATH + "がありません！");
+			Debug.Log ("Resources/" + SETTING_DATA_PATH + "不存在,请查看文件是否建立");
+			//Debug.Log ("Resources/" + SETTING_DATA_PATH + "がありません！");
 			return;
 		}
 
@@ -43,14 +44,17 @@ public class XcodeProjectUpdater : MonoBehaviour {
 		//ターゲットのID取得
 		string targetGuid = pbxProject.TargetGuidByName(PBXProject.GetUnityTargetName());
 
+		//根据设置路径先拷贝文件夹下的所有文件并在XcodeBuild中设置
 		//指定ディレクトリ内のファイルを全てコピーする
 		if(!string.IsNullOrEmpty(setting.CopyDirectoryPath)){
 			DirectoryProcessor.CopyAndAddBuildToXcode (pbxProject, targetGuid, setting.CopyDirectoryPath, buildPath, "");
 		}
 
+		//设置文件 CompilerFlags 属性
+		//设置其它属性 URL Identifier以下的配置
 		//コンパイラフラグの設定
-		foreach (XcodeProjectSetting.CompilerFlagsSet compilerFlagsSet in setting.CompilerFlagsSetList) {
-
+		foreach (XcodeProjectSetting.CompilerFlagsSet compilerFlagsSet in setting.CompilerFlagsSetList) 
+		{
 			foreach (string targetPath in compilerFlagsSet.TargetPathList) {
 				if(!pbxProject.ContainsFileByProjectPath(targetPath)){
 					Debug.Log (targetPath + "が無いのでコンパイラフラグが設定できませんでした");
@@ -69,6 +73,15 @@ public class XcodeProjectUpdater : MonoBehaviour {
 		//システムのフレームワークを追加
 		foreach (string framework in setting.FrameworkList) {
 			pbxProject.AddFrameworkToProject(targetGuid, framework, false);
+		}
+
+		//add tbd file
+		foreach (string tbdName in setting.LibsList) {
+			pbxProject.AddFileToBuild (targetGuid, pbxProject.AddFile (
+				"usr/lib/" + tbdName, 
+				"Frameworks/" + tbdName, 
+				PBXSourceTree.Sdk)
+			);
 		}
 
 		//Linker Flagの設定

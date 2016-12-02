@@ -5,6 +5,7 @@ using System.IO;
 
 /// <summary>
 /// ディレクトリを操作するクラス
+/// 主要作用是拷贝文件以及在Xcode中设置对应属性
 /// </summary>
 public static class DirectoryProcessor {
 
@@ -91,13 +92,12 @@ public static class DirectoryProcessor {
 				string relativePath = Path.Combine(currentDirectoryPath, directoryName);
 				pbxProject.AddFileToBuild(targetGuid, pbxProject.AddFile(relativePath, relativePath, PBXSourceTree.Source));
 				pbxProject.AddBuildProperty(
-					targetGuid, 
+					targetGuid,
 					XcodeProjectSetting.FRAMEWORK_SEARCH_PATHS_KEY, 
 					XcodeProjectSetting.PROJECT_ROOT + currentDirectoryPath
 				);
 			}
 		}
-
 	}
 
 	/// <summary>

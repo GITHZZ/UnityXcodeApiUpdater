@@ -58,6 +58,11 @@ public class XcodeProjectSetting : ScriptableObject {
 	public List<string> FrameworkList = new List<string>(){
 		/*"Social.framework",*/ //初期設定例
 	};
+
+	public List<string> LibsList = new List<string>(){
+		//libsqlite3.0.tbd
+	};
+		
 	public string[] LinkerFlagArray = new string[]{
 		/*"-ObjC", "-all_load"*/ //初期設定例
 	};

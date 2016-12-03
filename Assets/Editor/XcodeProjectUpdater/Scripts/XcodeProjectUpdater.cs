@@ -76,6 +76,7 @@ public class XcodeProjectUpdater : MonoBehaviour {
 		}
 
 		//add tbd file
+		//发现在Xcode8以下使用这个会有bug 请务必升级到最新版本
 		foreach (string tbdName in setting.LibsList) {
 			pbxProject.AddFileToBuild (targetGuid, pbxProject.AddFile (
 				"usr/lib/" + tbdName, 

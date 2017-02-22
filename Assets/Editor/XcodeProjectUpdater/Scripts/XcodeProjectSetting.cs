@@ -2,6 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum DevelopType {
+	Debug = 1,
+	Release = 2,
+};
+
 /// <summary>
 /// Xcodeのプロジェクトを書き出す際の設定値
 /// </summary>
@@ -22,6 +27,8 @@ public class XcodeProjectSetting : ScriptableObject {
 	public const string FRAMEWORK_SEARCH_PATHS_KEY = "FRAMEWORK_SEARCH_PATHS";
 	public const string LIBRARY_SEARCH_PATHS_KEY   = "LIBRARY_SEARCH_PATHS";
 	public const string ENABLE_BITCODE_KEY         = "ENABLE_BITCODE";
+	public const string DEVELOPMENT_TEAM           = "DEVELOPMENT_TEAM";
+	public const string PROVISIONING_PROFILE_SPECIFIER = "PROVISIONING_PROFILE_SPECIFIER";
 
 	//情報を設定するplistのファイル名
 	public const string INFO_PLIST_NAME = "Info.plist";
@@ -55,7 +62,38 @@ public class XcodeProjectSetting : ScriptableObject {
 
 	//設定する値のリスト FRAMEWORK_SEARCH_PATHS
 	public List<string> URLSchemeList;
-	public List<string> FrameworkList = new List<string>(){
+
+	//development info
+	[System.Serializable]
+	public struct DevelopmentInfo
+	{
+		public string provisioningProfileName;
+		public string developmentTeam;
+		public DevelopType tag;
+
+		public DevelopmentInfo(DevelopType t, string team, string profile)
+		{
+			developmentTeam = team;
+			provisioningProfileName = profile;
+			tag = t;
+		}
+	}
+	public List<DevelopmentInfo> developmentInfoList = new List<DevelopmentInfo>(){
+	};
+
+	//framework 
+	[System.Serializable]
+	public struct FrameworkSet{
+		public string content;
+		public bool weak;
+
+		public FrameworkSet(string c, bool w)
+		{
+			content = c;
+			weak = w;
+		}
+	}
+	public List<FrameworkSet> FrameworkList = new List<FrameworkSet>(){
 		/*"Social.framework",*/ //初期設定例
 	};
 

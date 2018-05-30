@@ -50,12 +50,12 @@ public class XcodeProjectSetting : ScriptableObject {
 	public const string STATUS_HIDDEN_KEY         = "UIStatusBarHidden";
 	public const string STATUS_BAR_APPEARANCE_KEY = "UIViewControllerBasedStatusBarAppearance";
 
-	//=================================================================================
-	//設定値
-	//=================================================================================
+    //=================================================================================
+    //設定値
+    //=================================================================================
 
-	//Xcodeへコピーするディレクトリへのパス
-	public string CopyDirectoryPath = "Assets/CopyToXcode";
+    //Xcodeへコピーするディレクトリへのパス
+    public List<string> CopyDirectoryPath = new List<string>(){};
 
 	//URL identifier
 	public string URLIdentifier = "";

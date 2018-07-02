@@ -98,17 +98,23 @@ public static class DirectoryProcessor {
 				string relativePath = Path.Combine(currentDirectoryPath, directoryName);
                 string fileGuild = pbxProject.AddFile(relativePath, relativePath, PBXSourceTree.Source);
 
-                pbxProject.AddFileToBuild(targetGuid, fileGuild);
-
                 if(embedHash.Contains(directoryName)){
+                    
                     pbxProject.AddFileToEmbedFrameworks(targetGuid, fileGuild);
+                    pbxProject.AddBuildProperty ( 
+                    	targetGuid, 
+                    	XcodeProjectSetting.LD_RUNPATH_SEARCH_PATHS_KEY, 
+                    	"$(inherited) @executable_path/Frameworks" 
+                    	);
+                }else{
+            		
+            		pbxProject.AddFileToBuild(targetGuid, fileGuild);
+            		pbxProject.AddBuildProperty(
+						targetGuid,
+						XcodeProjectSetting.FRAMEWORK_SEARCH_PATHS_KEY, 
+						XcodeProjectSetting.PROJECT_ROOT + currentDirectoryPath
+					);    	
                 }
-
-                pbxProject.AddBuildProperty(
-					targetGuid,
-					XcodeProjectSetting.FRAMEWORK_SEARCH_PATHS_KEY, 
-					XcodeProjectSetting.PROJECT_ROOT + currentDirectoryPath
-				);
 			}
 		}
 	}

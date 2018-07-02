@@ -25,6 +25,7 @@ public class XcodeProjectSetting : ScriptableObject {
 	//プロパティのkey
 	public const string LINKER_FLAG_KEY            = "OTHER_LDFLAGS";
 	public const string FRAMEWORK_SEARCH_PATHS_KEY = "FRAMEWORK_SEARCH_PATHS";
+	public const string LD_RUNPATH_SEARCH_PATHS_KEY = "LD_RUNPATH_SEARCH_PATHS";
 	public const string LIBRARY_SEARCH_PATHS_KEY   = "LIBRARY_SEARCH_PATHS";
 	public const string ENABLE_BITCODE_KEY         = "ENABLE_BITCODE";
 	public const string DEVELOPMENT_TEAM           = "DEVELOPMENT_TEAM";

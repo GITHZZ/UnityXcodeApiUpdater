@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{CD011A59-5101-3F87-220B-6EDA8B7DF95C}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/XcodeProjectUpdater/XcodeProjectSetting.cs">
     <Files>
-      <File FileName="Assets/Editor/XcodeProjectUpdater/XcodeProjectUpdater.cs" Line="50" Column="53" />
-      <File FileName="Assets/Editor/XcodeProjectUpdater/XcodeProjectSetting.cs" Line="58" Column="9" />
+      <File FileName="Assets/Editor/XcodeProjectUpdater/XcodeProjectUpdater.cs" Line="56" Column="100" />
+      <File FileName="Assets/Editor/XcodeProjectUpdater/XcodeProjectSetting.cs" Line="58" Column="42" />
       <File FileName="Assets/Editor/XcodeProjectUpdater/ExtensionName.cs" Line="10" Column="22" />
       <File FileName="Assets/Editor/XcodeProjectUpdater/Core/PBXProjectExtensions.cs" Line="403" Column="28" />
     </Files>
